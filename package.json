@@ -1,6 +1,6 @@
 {
-  "name": "react-native-native-logger",
-  "title": "React Native Native Logger",
+  "name": "react-native-logs-from-native",
+  "title": "React Native Logs From Native",
   "version": "0.0.1",
   "description": "Library allowing to print traces from native layer to the RN console",
   "main": "index.js",
@@ -9,15 +9,15 @@
     "android",
     "index.js",
     "ios",
-    "react-native-native-logger.podspec"
+    "react-native-logs-from-native.podspec"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BartoszKlonowski/react-native-native-logger.git",
-    "baseUrl": "https://github.com/BartoszKlonowski/react-native-native-logger"
+    "url": "git+https://github.com/BartoszKlonowski/react-native-logs-from-native.git",
+    "baseUrl": "https://github.com/BartoszKlonowski/react-native-logs-from-native"
   },
   "keywords": [
     "react-native"
