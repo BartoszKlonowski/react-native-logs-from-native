@@ -1,8 +1,8 @@
 {
   "name": "react-native-native-logger",
   "title": "React Native Native Logger",
-  "version": "1.0.0",
-  "description": "TODO",
+  "version": "0.0.1",
+  "description": "Library allowing to print traces from native layer to the RN console",
   "main": "index.js",
   "files": [
     "README.md",
@@ -26,7 +26,7 @@
     "name": "Bartosz Klonowski",
     "email": "Bartosz.Klonowski@cxcode.pl"
   },
-  "license": "MIT",
+  "license": "GPL-3.0-or-later",
   "licenseFilename": "LICENSE",
   "readmeFilename": "README.md",
   "peerDependencies": {
