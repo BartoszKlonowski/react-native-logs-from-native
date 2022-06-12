@@ -16,15 +16,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/github_account/react-native-native-logger.git",
-    "baseUrl": "https://github.com/github_account/react-native-native-logger"
+    "url": "git+https://github.com/BartoszKlonowski/react-native-native-logger.git",
+    "baseUrl": "https://github.com/BartoszKlonowski/react-native-native-logger"
   },
   "keywords": [
     "react-native"
   ],
   "author": {
-    "name": "Your Name",
-    "email": "yourname@email.com"
+    "name": "Bartosz Klonowski",
+    "email": "Bartosz.Klonowski@cxcode.pl"
   },
   "license": "MIT",
   "licenseFilename": "LICENSE",
