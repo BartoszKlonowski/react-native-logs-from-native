@@ -1,0 +1,40 @@
+{
+  "name": "react-native-logs-from-native",
+  "title": "React Native Logs From Native",
+  "version": "0.0.1",
+  "description": "Library allowing to print traces from native layer to the RN console",
+  "main": "index.js",
+  "files": [
+    "README.md",
+    "android",
+    "index.js",
+    "ios",
+    "react-native-logs-from-native.podspec"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BartoszKlonowski/react-native-logs-from-native.git",
+    "baseUrl": "https://github.com/BartoszKlonowski/react-native-logs-from-native"
+  },
+  "keywords": [
+    "react-native"
+  ],
+  "author": {
+    "name": "Bartosz Klonowski",
+    "email": "Bartosz.Klonowski@cxcode.pl"
+  },
+  "license": "GPL-3.0-or-later",
+  "licenseFilename": "LICENSE",
+  "readmeFilename": "README.md",
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-native": ">=0.68.0"
+  },
+  "devDependencies": {
+    "react": "^18.0.0",
+    "react-native": "^0.68.0"
+  }
+}
