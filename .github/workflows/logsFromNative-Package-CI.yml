@@ -6,6 +6,9 @@ jobs:
   install:
     name: Install dependencies
     runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: ./package
 
     steps:
       - name: Ensure the cross-platform Git on Windows
@@ -30,10 +33,13 @@ jobs:
           key: ${{ hashFiles('./package.json') }}
 
 
-  verify:
-    name: Verify the sources
+  lint:
+    name: Lint the sources
     runs-on: windows-latest
     needs: install
+    defaults:
+      run:
+        working-directory: ./package
 
     steps:
       - name: Ensure the cross-platform Git on Windows
@@ -52,13 +58,16 @@ jobs:
           key: ${{ hashFiles('./package.json') }}
 
       - name: Run ESLint on the sources
-        run: npx eslint ./source/
+        run: npx eslint .
 
 
   test:
     name: Run the unit tests
     runs-on: windows-latest
     needs: install
+    defaults:
+      run:
+        working-directory: ./package
 
     steps:
       - name: Ensure the cross-platform Git on Windows
@@ -78,48 +87,3 @@ jobs:
 
       - name: Run unit tests
         run: npx jest
-
-  build-android-app:
-    name: Verify the app builds for Android platform
-    runs-on: windows-latest
-    needs: [install, verify]
-
-    steps:
-      - name: Ensure the cross-platform Git on Windows
-        run: git config --global core.autocrlf false
-
-      - uses: actions/checkout@v2
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-
-      - name: Pull the npm dependencies
-        uses: actions/cache@v2.1.6
-        with:
-          path: ./node_modules
-          key: ${{ hashFiles('./package.json') }}
-
-      - name: Build the Android OS app
-        run: cd android; ./gradlew assembleDebug
-
-  build-iOS-app:
-    name: Verify the app builds for iOS platform
-    runs-on: macos-latest
-    needs: [install, verify]
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-
-      - name: Install node_modules on MacOS machine
-        run: "npm install"
-
-      - run: xcode-select -p
-
-      - run: pod install
-        working-directory: ios
-        name: Install pod dependencies
-
-      - name: Builds the iOS app
-        run: "npx react-native run-ios"
