@@ -1,28 +1,15 @@
 module.exports = {
-  extends: ["@callstack"],
+  extends: ["@callstack", "plugin:@typescript-eslint/recommended",
+  "plugin:@typescript-eslint/recommended-requiring-type-checking"],
   env: {
     "react-native/react-native": true,
   },
-  parser: "babel-eslint",
-  plugins: ["react", "react-native"],
+  parser: "@typescript-eslint/parser",
+  plugins: ["react", "react-native", "@typescript-eslint"],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
+    project: ["./tsconfig.json"],
   },
-  overrides: [
-    {
-      files: ["*.ts", "*.tsx"],
-      parser: "@typescript-eslint/parser",
-      plugins: ["@typescript-eslint"],
-      extends: [
-        "plugin:@typescript-eslint/recommended",
-        "plugin:@typescript-eslint/recommended-requiring-type-checking",
-      ],
-
-      parserOptions: {
-        project: ["./tsconfig.json"],
-      },
-    },
-  ],
 };

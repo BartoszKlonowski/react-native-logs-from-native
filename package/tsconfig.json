@@ -5,7 +5,10 @@
     "preserveConstEnums": true,
     "sourceMap": true,
     "jsx": "react",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
   },
+  "include": ["index.ts", "source", "__tests__"],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }
