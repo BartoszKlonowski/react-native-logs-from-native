@@ -1,16 +1,13 @@
-name: logsFromNative-CI
+name: logsFromNative-Package-CI
 
 on: [push]
 
 jobs:
   install:
     name: Install dependencies
-    runs-on: windows-latest
+    runs-on: macos-latest
 
     steps:
-      - name: Ensure the cross-platform Git on Windows
-        run: git config --global core.autocrlf false
-
       - name: Checkout repository
         uses: actions/checkout@v2
 
