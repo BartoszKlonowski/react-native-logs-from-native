@@ -33,7 +33,7 @@ jobs:
 
 
   verify:
-    name: Lint the sources
+    name: Verify the Example app sources
     runs-on: windows-latest
     needs: install
 
