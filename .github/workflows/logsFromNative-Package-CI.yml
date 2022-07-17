@@ -6,9 +6,6 @@ jobs:
   install:
     name: Install dependencies
     runs-on: windows-latest
-    defaults:
-      run:
-        working-directory: package
 
     steps:
       - name: Ensure the cross-platform Git on Windows
@@ -29,17 +26,16 @@ jobs:
       - name: Cache
         uses: actions/cache@v2.1.6
         with:
-          path: ./node_modules
-          key: ${{ hashFiles('./package.json') }}
+          path: |
+            ./package/node_modules
+            ./example/node_modules
+          key: ${{ hashFiles('./package/package.json') }}-${{ hashFiles('./example/package.json') }}
 
 
   lint:
     name: Lint the sources
     runs-on: windows-latest
     needs: install
-    defaults:
-      run:
-        working-directory: ./package
 
     steps:
       - name: Ensure the cross-platform Git on Windows
@@ -54,20 +50,19 @@ jobs:
       - name: Cache
         uses: actions/cache@v2.1.6
         with:
-          path: ./node_modules
-          key: ${{ hashFiles('./package.json') }}
+          path: |
+            ./package/node_modules
+            ./example/node_modules
+          key: ${{ hashFiles('./package/package.json') }}-${{ hashFiles('./example/package.json') }}
 
       - name: Run ESLint on the sources
-        run: npx eslint ./source
+        run: cd package && npx eslint ./source
 
 
   typecheck:
     name: Check the types
     runs-on: windows-latest
     needs: install
-    defaults:
-      run:
-        working-directory: package
 
     steps:
       - name: Ensure the cross-platform Git on Windows
@@ -82,20 +77,19 @@ jobs:
       - name: Cache
         uses: actions/cache@v2.1.6
         with:
-          path: ./node_modules
-          key: ${{ hashFiles('./package.json') }}
+          path: |
+            ./package/node_modules
+            ./example/node_modules
+          key: ${{ hashFiles('./package/package.json') }}-${{ hashFiles('./example/package.json') }}
 
       - name: Run ESLint on the sources
-        run: npx tsc --noEmit
+        run: cd package && npx tsc --noEmit
 
 
   test:
     name: Run the unit tests
     runs-on: windows-latest
     needs: install
-    defaults:
-      run:
-        working-directory: package
 
     steps:
       - name: Ensure the cross-platform Git on Windows
@@ -110,8 +104,10 @@ jobs:
       - name: Pull the npm dependencies
         uses: actions/cache@v2.1.6
         with:
-          path: ./node_modules
-          key: ${{ hashFiles('./package.json') }}
+          path: |
+            ./package/node_modules
+            ./example/node_modules
+          key: ${{ hashFiles('./package/package.json') }}-${{ hashFiles('./example/package.json') }}
 
       - name: Run unit tests
-        run: npx jest
+        run: cd package && npx jest
