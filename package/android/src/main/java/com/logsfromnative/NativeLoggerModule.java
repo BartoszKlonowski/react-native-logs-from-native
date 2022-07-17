@@ -1,6 +1,4 @@
-// NativeLoggerModule.java
-
-package com.reactlibrary;
+package com.logsfromnative;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;

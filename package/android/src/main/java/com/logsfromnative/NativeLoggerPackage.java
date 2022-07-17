@@ -1,6 +1,4 @@
-// NativeLoggerPackage.java
-
-package com.reactlibrary;
+package com.logsfromnative;
 
 import java.util.Arrays;
 import java.util.Collections;
