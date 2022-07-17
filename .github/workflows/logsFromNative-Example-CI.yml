@@ -117,7 +117,7 @@ jobs:
           java-version: '11'
 
       - name: Build the Android OS app
-        run: cd example && npx react-native run-android
+        run: cd example/android && ./gradlew assembleDebug
 
 
   build-iOS-app:
