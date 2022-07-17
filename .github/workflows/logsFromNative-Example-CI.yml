@@ -61,9 +61,6 @@ jobs:
       - name: Run ESLint on the sources
         run: cd example && npx tsc --noEmit
 
-      - name: Run unit tests
-        run: cd example && npx jest
-
 
   test:
     name: Run the unit tests
