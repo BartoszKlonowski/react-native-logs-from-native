@@ -112,7 +112,7 @@ jobs:
           key: ${{ hashFiles('./package/package.json') }}-${{ hashFiles('./example/package.json') }}
 
       - name: Build the Android OS app
-        run: cd android; ./gradlew assembleDebug
+        run: cd example/android; ./gradlew assembleDebug
 
 
   build-iOS-app:
@@ -131,7 +131,7 @@ jobs:
       - run: cd example/ios && xcode-select -p
 
       - name: Install pod dependencies
-        run: cd example/ios && pod install
+        run: cd example/ios && pod install --verbose
 
       - name: Builds the iOS app
         run: cd example/ios && xcodebuild -workspace example.xcworkspace -configuration Debug -scheme example CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ENABLE_BITCODE=NO
