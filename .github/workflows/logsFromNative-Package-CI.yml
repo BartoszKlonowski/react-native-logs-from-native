@@ -8,7 +8,7 @@ jobs:
     runs-on: windows-latest
     defaults:
       run:
-        working-directory: ./package
+        working-directory: package
 
     steps:
       - name: Ensure the cross-platform Git on Windows
@@ -67,7 +67,7 @@ jobs:
     needs: install
     defaults:
       run:
-        working-directory: ./package
+        working-directory: package
 
     steps:
       - name: Ensure the cross-platform Git on Windows
@@ -95,7 +95,7 @@ jobs:
     needs: install
     defaults:
       run:
-        working-directory: ./package
+        working-directory: package
 
     steps:
       - name: Ensure the cross-platform Git on Windows
