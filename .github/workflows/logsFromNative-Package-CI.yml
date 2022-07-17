@@ -1,0 +1,113 @@
+name: logsFromNative-Package-CI
+
+on: [push]
+
+jobs:
+  install:
+    name: Install dependencies
+    runs-on: windows-latest
+
+    steps:
+      - name: Ensure the cross-platform Git on Windows
+        run: git config --global core.autocrlf false
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+
+      - name: Display tools versions
+        run: npm --version;
+
+      - name: Restore all the packages
+        run: npm install
+
+      - name: Cache
+        uses: actions/cache@v2.1.6
+        with:
+          path: |
+            ./package/node_modules
+            ./example/node_modules
+          key: ${{ hashFiles('./package/package.json') }}-${{ hashFiles('./example/package.json') }}
+
+
+  lint:
+    name: Lint the sources
+    runs-on: windows-latest
+    needs: install
+
+    steps:
+      - name: Ensure the cross-platform Git on Windows
+        run: git config --global core.autocrlf false
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+
+      - name: Cache
+        uses: actions/cache@v2.1.6
+        with:
+          path: |
+            ./package/node_modules
+            ./example/node_modules
+          key: ${{ hashFiles('./package/package.json') }}-${{ hashFiles('./example/package.json') }}
+
+      - name: Run ESLint on the sources
+        run: cd package && npx eslint ./source
+
+
+  typecheck:
+    name: Check the types
+    runs-on: windows-latest
+    needs: install
+
+    steps:
+      - name: Ensure the cross-platform Git on Windows
+        run: git config --global core.autocrlf false
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+
+      - name: Cache
+        uses: actions/cache@v2.1.6
+        with:
+          path: |
+            ./package/node_modules
+            ./example/node_modules
+          key: ${{ hashFiles('./package/package.json') }}-${{ hashFiles('./example/package.json') }}
+
+      - name: Run ESLint on the sources
+        run: cd package && npx tsc --noEmit
+
+
+  test:
+    name: Run the unit tests
+    runs-on: windows-latest
+    needs: install
+
+    steps:
+      - name: Ensure the cross-platform Git on Windows
+        run: git config --global core.autocrlf false
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+
+      - name: Pull the npm dependencies
+        uses: actions/cache@v2.1.6
+        with:
+          path: |
+            ./package/node_modules
+            ./example/node_modules
+          key: ${{ hashFiles('./package/package.json') }}-${{ hashFiles('./example/package.json') }}
+
+      - name: Run unit tests
+        run: cd package && npx jest

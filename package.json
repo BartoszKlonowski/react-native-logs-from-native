@@ -1,0 +1,5 @@
+{
+    "scripts": {
+        "install": "cd package && npm install && cd ../example && npm install"
+    }
+}

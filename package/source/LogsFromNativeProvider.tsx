@@ -1,6 +1,6 @@
-import { VFC } from 'react';
+import { VFC } from "react";
 
-type Props = {};
+type Props = unknown;
 
 const LogsFromNativeProvider: VFC<Props> = () => {
   return null;
