@@ -1,4 +1,4 @@
-name: logsFromNative-Package-CI
+name: logsFromNative-Example-CI
 
 on: [push]
 
