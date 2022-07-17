@@ -91,7 +91,7 @@ jobs:
 
   build-android-app:
     name: Verify the app builds for Android platform
-    runs-on: macos-latest
+    runs-on: windows-latest
     needs: [install, verify]
 
     steps:
@@ -131,4 +131,4 @@ jobs:
         run: cd example/ios && pod install --verbose
 
       - name: Builds the iOS app
-        run: cd example/ios && xcodebuild -workspace example.xcworkspace -configuration Debug -scheme example CODE_SIGNING_REQUIRED=NO ENABLE_BITCODE=NO
+        run: cd example && npx react-native run-ios
