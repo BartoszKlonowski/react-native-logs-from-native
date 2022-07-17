@@ -95,6 +95,9 @@ jobs:
     needs: [install, verify]
 
     steps:
+      - name: Ensure the cross-platform Git on Windows
+        run: git config --global core.autocrlf false
+
       - uses: actions/checkout@v2
 
       - name: Setup Node.js
