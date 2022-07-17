@@ -91,13 +91,10 @@ jobs:
 
   build-android-app:
     name: Verify the app builds for Android platform
-    runs-on: windows-latest
+    runs-on: macos-latest
     needs: [install, verify]
 
     steps:
-      - name: Ensure the cross-platform Git on Windows
-        run: git config --global core.autocrlf false
-
       - uses: actions/checkout@v2
 
       - name: Setup Node.js
@@ -112,7 +109,7 @@ jobs:
           key: ${{ hashFiles('./package/package.json') }}-${{ hashFiles('./example/package.json') }}
 
       - name: Build the Android OS app
-        run: choco install -y nodejs-lts openjdk11; cd example/android; ./gradlew assembleDebug
+        run: cd example/android && ./gradlew assembleDebug
 
 
   build-iOS-app:
