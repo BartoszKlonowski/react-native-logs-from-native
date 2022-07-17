@@ -111,6 +111,11 @@ jobs:
             ./example/node_modules
           key: ${{ hashFiles('./package/package.json') }}-${{ hashFiles('./example/package.json') }}
 
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+
       - name: Build the Android OS app
         run: cd example && npx react-native run-android
 
