@@ -58,7 +58,35 @@ jobs:
           key: ${{ hashFiles('./package.json') }}
 
       - name: Run ESLint on the sources
-        run: npx eslint .
+        run: npx eslint ./source
+
+
+  typecheck:
+    name: Check the types
+    runs-on: windows-latest
+    needs: install
+    defaults:
+      run:
+        working-directory: ./package
+
+    steps:
+      - name: Ensure the cross-platform Git on Windows
+        run: git config --global core.autocrlf false
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+
+      - name: Cache
+        uses: actions/cache@v2.1.6
+        with:
+          path: ./node_modules
+          key: ${{ hashFiles('./package.json') }}
+
+      - name: Run ESLint on the sources
+        run: npx tsc --noEmit
 
 
   test:
