@@ -112,7 +112,7 @@ jobs:
           key: ${{ hashFiles('./package/package.json') }}-${{ hashFiles('./example/package.json') }}
 
       - name: Build the Android OS app
-        run: cd example/android; ./gradlew assembleDebug
+        run: choco install -y nodejs-lts openjdk11; cd example/android; ./gradlew assembleDebug
 
 
   build-iOS-app:
