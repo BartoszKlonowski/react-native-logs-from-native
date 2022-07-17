@@ -5,9 +5,10 @@ import {
   NativeEventEmitter,
   DeviceEventEmitter,
   Platform,
+  NativeModule,
 } from "react-native";
 
-const { NativeLogger } = NativeModules;
+const nativeLogger: NativeModule = NativeModules.NativeLogger as NativeModule;
 
 type Props = unknown;
 
@@ -15,17 +16,17 @@ const LogsFromNativeProvider: VFC<Props> = () => {
   useEffect(() => {
     return () => {
       subscription.remove();
-    }
-  }, []);
+    };
+  });
 
   const notificationEventManager = Platform.select({
     android: DeviceEventEmitter,
-    ios: new NativeEventEmitter(NativeLogger),
+    ios: new NativeEventEmitter(nativeLogger),
   });
 
   const subscription = notificationEventManager.addListener(
     "newLogPrinted",
-    (payload) => {
+    (payload: Record<string, unknown>) => {
       console.log(payload.message);
     }
   );
