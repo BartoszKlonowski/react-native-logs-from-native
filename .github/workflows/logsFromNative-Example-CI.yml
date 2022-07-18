@@ -138,5 +138,12 @@ jobs:
       - name: Install pod dependencies
         run: cd example/ios && pod install --verbose
 
+      - name: Opening Simulator app
+        run: |
+          while ! open -Fn /Applications/Xcode_13.2.1.app/Contents/Developer/Applications/Simulator.app; do
+            echo "Retry"
+          done
+          echo "Success"
+
       - name: Builds the iOS app
         run: cd example && npx react-native run-ios
