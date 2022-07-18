@@ -17,7 +17,10 @@ import {
   Text,
   useColorScheme,
   View,
+  Button,
+  NativeModules,
 } from 'react-native';
+import LogsFromNativeProvider from 'react-native-logs-from-native';
 
 import {
   Colors,
@@ -75,6 +78,12 @@ const App = () => {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
+          <Button
+            title={'Send log from native'}
+            onPress={() => {
+              NativeModules.ExampleLog.sendLogFromNative('TEST');
+            }}
+          />
           <Section title="Step One">
             Edit <Text style={styles.highlight}>App.tsx</Text> to change this
             screen and then come back to see your edits.
@@ -91,6 +100,7 @@ const App = () => {
           <LearnMoreLinks />
         </View>
       </ScrollView>
+      <LogsFromNativeProvider />
     </SafeAreaView>
   );
 };

@@ -3,7 +3,7 @@
   "title": "React Native Logs From Native",
   "version": "0.0.1",
   "description": "Library allowing to print traces from native layer to the RN console",
-  "main": "index.js",
+  "main": "index.ts",
   "files": [
     "README.md",
     "android",
