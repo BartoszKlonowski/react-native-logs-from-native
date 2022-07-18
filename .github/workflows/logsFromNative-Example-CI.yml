@@ -3,39 +3,9 @@ name: logsFromNative-Example-CI
 on: [push]
 
 jobs:
-  install:
-    name: Install dependencies
-    runs-on: windows-latest
-
-    steps:
-      - name: Ensure the cross-platform Git on Windows
-        run: git config --global core.autocrlf false
-
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-
-      - name: Display tools versions
-        run: npm --version;
-
-      - name: Restore all the packages
-        run: npm install
-
-      - name: Cache
-        uses: actions/cache@v2.1.6
-        with:
-          path: |
-            ./package/node_modules
-            ./example/node_modules
-          key: ${{ hashFiles('./package/package.json') }}-${{ hashFiles('./example/package.json') }}
-
-
   verify:
     name: Verify the Example app sources
     runs-on: windows-latest
-    needs: install
 
     steps:
       - name: Ensure the cross-platform Git on Windows
@@ -48,12 +18,7 @@ jobs:
         uses: actions/setup-node@v2
 
       - name: Cache
-        uses: actions/cache@v2.1.6
-        with:
-          path: |
-            ./package/node_modules
-            ./example/node_modules
-          key: ${{ hashFiles('./package/package.json') }}-${{ hashFiles('./example/package.json') }}
+        run: cd example && npm install
 
       - name: Run ESLint on the sources
         run: cd example && npx eslint .
@@ -62,34 +27,10 @@ jobs:
         run: cd example && npx tsc --noEmit
 
 
-  test:
-    name: Run the unit tests
-    runs-on: windows-latest
-    needs: install
-
-    steps:
-      - name: Ensure the cross-platform Git on Windows
-        run: git config --global core.autocrlf false
-
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-
-      - name: Pull the npm dependencies
-        uses: actions/cache@v2.1.6
-        with:
-          path: |
-            ./package/node_modules
-            ./example/node_modules
-          key: ${{ hashFiles('./package/package.json') }}-${{ hashFiles('./example/package.json') }}
-
-
   build-android-app:
     name: Verify the app builds for Android platform
     runs-on: windows-latest
-    needs: [install, verify]
+    needs: [verify]
 
     steps:
       - name: Ensure the cross-platform Git on Windows
@@ -101,12 +42,7 @@ jobs:
         uses: actions/setup-node@v2
 
       - name: Pull the npm dependencies
-        uses: actions/cache@v2.1.6
-        with:
-          path: |
-            ./package/node_modules
-            ./example/node_modules
-          key: ${{ hashFiles('./package/package.json') }}-${{ hashFiles('./example/package.json') }}
+        run: cd example && npm install
 
       - uses: actions/setup-java@v3
         with:
@@ -120,7 +56,7 @@ jobs:
   build-iOS-app:
     name: Verify the app builds for iOS platform
     runs-on: macos-latest
-    needs: [install, verify]
+    needs: [verify]
     steps:
       - uses: actions/checkout@v2
 
