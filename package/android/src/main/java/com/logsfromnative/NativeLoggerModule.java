@@ -6,8 +6,6 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
-import java.util.ArrayList;
-
 public class NativeLoggerModule extends ReactContextBaseJavaModule {
 
     private final ReactApplicationContext reactContext;
@@ -30,6 +28,4 @@ public class NativeLoggerModule extends ReactContextBaseJavaModule {
 
         commonReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit("newLogPrinted", params);
     }
-
-    static private ArrayList<Log> logs = new ArrayList<>();
 }
